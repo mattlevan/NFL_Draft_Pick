@@ -10,14 +10,23 @@
  * Simulate a limited version of the draft process, involving 8 teams and 32
  * players. Pick any 8 teams from the actual NFL and 32 players of your choice.
  *
- * Draft.java
- * Driver class for NFL Draft Pick program.
+ * Team.java
+ * Team class. 
  *
  */
 
 import java.util.*;
+import Player;
 
-public class Draft {
-    public static void main(String[] args) {
+public class Team {
+    // Class variables
+
+    private int rank; // Rank, possible values are 1-8
+    private Player[4] draftPicks;
+
+    // Class default constructor
+
+    public Team(int rank, Player[] players) {
+
     }
 }
