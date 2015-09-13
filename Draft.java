@@ -19,5 +19,17 @@ import java.util.*;
 
 public class Draft {
     public static void main(String[] args) {
+        // Array of 8 NFL teams
+        Team[] teams = new Team[8];
+
+        // List of 8 team names
+        String[] teamNames = {"Dallas Cowboys", "New England Patriots",
+            "Seattle Seahawks", "Oakland Raiders", "Greenbay Packers",
+            "Pittsburgh Steelers", "San Francisco 49ers", "Denver Broncos"};
+
+        // Populate Array teams with Team objects constructed with teamNames
+        for (int i = 0; i < 8; i++) {
+            teams[i] = new Team(teamNames[i]);
+        }
     }
 }
