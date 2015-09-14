@@ -32,22 +32,26 @@ public class Player {
 
     // Methods
 
+    // Set name
     public String setName(String name) {
         this.name = name;
 
         return name;
     }
 
+    // Get name
     public String getName() {
         return this.name;
     }
 
+    // Set round eligible for drafting
     public int setRound(int round) {
         this.round = round;
 
         return round;
     }
 
+    // Get round eligible for drafting
     public int getRound() {
         return this.round;
     }

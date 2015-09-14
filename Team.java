@@ -17,7 +17,7 @@
 
 import java.util.*;
 
-public class Team {
+public class Team implements Comparable<Team> {
     // Variables
 
     private String name; // Example: "Dallas Cowboys"
@@ -28,22 +28,26 @@ public class Team {
     // Constructor
 
     public Team(String name) {
+        super();
         this.setName(name);
     }
 
     // Methods
 
+    // Set name
     public String setName(String name) { // Set team name
         this.name = name;
 
         return name;
     }
 
+    // Get name
     public String getName() {
         return this.name;
     }
 
-    public int setWinningPercentage(int winningPercentage) { // Set winning %
+    // Set winning %
+    public int setWinningPercentage(int winningPercentage) {
         if (winningPercentage >= 0 && winningPercentage <= 100) {
             this.winningPercentage = winningPercentage;
             return winningPercentage;
@@ -55,11 +59,13 @@ public class Team {
         }
     }
 
-    public int getWinningPercentage() { // Retrieve a team's winning percentage
+    // Retrieve a team's winning percentage
+    public int getWinningPercentage() { 
         return this.winningPercentage;
     }
 
-    public int setRank(int rank) { // Set a team's rank
+    // Set a team's rank
+    public int setRank(int rank) { 
         if (rank > 0 && rank < 9) {
             this.rank = rank;
             return rank;
@@ -70,11 +76,13 @@ public class Team {
         }
     }
 
-    public int getRank() { // Retrieve a team's rank
+    // Retrieve a team's rank
+    public int getRank() { 
         return this.rank;
     }
 
-    public Player addDraftPick(Player draftPick) { // Choose a draft pick
+    // Choose a draft pick
+    public Player addDraftPick(Player draftPick) {
         if (this.draftPicks.size() <= 4) {
             this.draftPicks.add(draftPick);
         }
@@ -84,5 +92,11 @@ public class Team {
         }
 
         return draftPick;
+    }
+
+    // Override compareTo method for proper implementation of Comparable
+    public int compareTo(Team otherTeam) {
+        return Integer.compare(this.getWinningPercentage(),
+            otherTeam.getWinningPercentage());
     }
 }
