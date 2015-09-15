@@ -51,6 +51,9 @@ public class Draft {
 
         // Assign a winning % to each team randomly and rank accordingly
         rankTeams();
+
+        // Populate ArrayList players and give each Player a random round #
+        rankPlayers();
     }
 
     // Generates a random number between 1 and upperLimit
@@ -112,6 +115,18 @@ public class Draft {
         System.out.format("%-25s%-5s%-9s\n\n", "TEAM", "RANK", "WINNING %");
         for (final Object[] row : rankTable) {
             System.out.format("%-25s%-5s%-9s\n", row);
+        }
+
+        return 0;
+    }
+
+    // Instantiates ArrayList players and gives each Player a random round #
+    public static int rankPlayers() {
+        // Add each player name to ArrayList players as a new Player Object
+        for (String playerName : playerNames) {
+            // Instantiate each Player Object with a random number 1-4
+            int randomRound = generateRandomNumber(4);
+            players.add(new Player(playerName, randomRound));
         }
 
         return 0;

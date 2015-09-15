@@ -17,7 +17,7 @@
 
 import java.util.*;
 
-public class Player {
+public class Player implements Comparable<Player> {
     // Variables
 
     private String name; // Example: "Mark McGuire"
@@ -54,5 +54,10 @@ public class Player {
     // Get round eligible for drafting
     public int getRound() {
         return this.round;
+    }
+
+    public int compareTo(Player otherPlayer) {
+        return Integer.compare(this.getRound(),
+            otherPlayer.getRound());
     }
 }
