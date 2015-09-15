@@ -59,7 +59,7 @@ public class Draft {
     // Generates a random number between 1 and upperLimit
     public static int generateRandomNumber(int upperLimit) {
         Random randomGenerator = new Random();
-        int randomInt = randomGenerator.nextInt(upperLimit - 1) + 1;
+        int randomInt = randomGenerator.nextInt(upperLimit) + 1;
 
         return randomInt;
     }
@@ -117,6 +117,9 @@ public class Draft {
             System.out.format("%-25s%-5s%-9s\n", row);
         }
 
+        // Print two new lines to separate from next section
+        System.out.println("\n");
+
         return 0;
     }
 
@@ -128,6 +131,28 @@ public class Draft {
             int randomRound = generateRandomNumber(4);
             players.add(new Player(playerName, randomRound));
         }
+
+        // Two-dimensional Array for printing table of players and their rounds
+        final Object[][] playersTable = new String[32][2];
+
+        // Populate two-dimensional playersTable
+        for (int i = 0; i < players.size(); i++) {
+            playersTable[i] = new String[] {players.get(i).getName(), 
+                Integer.toString(players.get(i).getRound())};
+        }
+
+        // Print informational message regard players and their rounds
+        System.out.println("Here are the players' randomly selected draft" +
+            " rounds:\n");
+
+        // Format and print rankPlayers after printing table labels
+        System.out.format("%-20s%-5s\n\n", "PLAYER", "ROUND");
+        for (final Object[] row : playersTable) {
+            System.out.format("%-20s%-5s\n", row);
+        }
+        
+        // Print two new lines to separate from next section
+        System.out.println("\n");
 
         return 0;
     }
