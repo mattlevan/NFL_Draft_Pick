@@ -54,13 +54,16 @@ public class Draft {
 
         // Populate ArrayList players and give each Player a random round #
         rankPlayers();
+		
+		// Run the draft
+		draftPick();
     }
-
+	
     // Generates a random number between 1 and upperLimit
     public static int generateRandomNumber(int upperLimit) {
         Random randomGenerator = new Random();
         int randomInt = randomGenerator.nextInt(upperLimit) + 1;
-
+		
         return randomInt;
     }
 
@@ -125,13 +128,37 @@ public class Draft {
 
     // Instantiates ArrayList players and gives each Player a random round #
     public static int rankPlayers() {
+		// Round # counters to ensure exactly 8 players assigned per round
+		List<Integer> roundNumbers = new ArrayList<Integer>();
+		
+		// Random round #
+		int randomRound = 0;
+	
+		// Populate roundNumbers with round numbers 1-4 
+		for (int i = 0; i < 8; i++) {
+			roundNumbers.add(1);
+			roundNumbers.add(2);
+			roundNumbers.add(3);
+			roundNumbers.add(4);
+		}
+		
         // Add each player name to ArrayList players as a new Player Object
         for (String playerName : playerNames) {
-            // Instantiate each Player Object with a random number 1-4
-            int randomRound = generateRandomNumber(4);
-            players.add(new Player(playerName, randomRound));
-        }
+			// Get random round number from ArrayList roundNumbers by removing it
+			if (roundNumbers.size() > 1) {
+				randomRound = roundNumbers.remove(generateRandomNumber(roundNumbers.size()-1));
+			}
+			else {
+				randomRound = roundNumbers.remove(0);
+			}
+			
+			// Instantiate each Player Object with a random number 1-4
+			players.add(new Player(playerName, randomRound));
+		}
 
+		// Sort players by round number in ascending order
+		Collections.sort(players);
+		
         // Two-dimensional Array for printing table of players and their rounds
         final Object[][] playersTable = new String[32][2];
 
@@ -147,8 +174,13 @@ public class Draft {
 
         // Format and print rankPlayers after printing table labels
         System.out.format("%-20s%-5s\n\n", "PLAYER", "ROUND");
+		int i = 0;
         for (final Object[] row : playersTable) {
+			if (i > 0 && i % 8 == 0) {
+				System.out.println("");
+			}
             System.out.format("%-20s%-5s\n", row);
+			i++;
         }
         
         // Print two new lines to separate from next section
@@ -156,4 +188,41 @@ public class Draft {
 
         return 0;
     }
+	
+	// Draft pick method, each team chooses a total of 4 players
+	public static int draftPick() {
+		// Each team removes 1 player from ArrayList players per round
+		for (int round = 1; round <= 4; round++) {
+			for (int index = 7; index >= 0; index--) {
+				if (index == 0) {
+					teams[index].addDraftPick(players.remove(index));
+				} 
+				else {
+					int randomIndex = generateRandomNumber(index);
+					teams[index].addDraftPick(players.remove(randomIndex));					
+				}
+			}
+		}
+		
+        // Print informational message
+        System.out.println("Here are the draft results:\n");
+
+        // Format and print draftTable after printing table labels
+        System.out.format("%-25s%-20s%-5s\n\n", "TEAM", "PLAYER", "ROUND");
+        
+		// Print table of results
+		for (int i = 0; i < 4; i++) {
+			for (Team team : teams) {
+				System.out.format("%-25s%-20s%-5s\n", team.getName(), 
+					team.getDraftPick(i).getName(), i+1);
+			}
+			
+			System.out.println("");
+		}
+		
+        // Print a new line to separate from next section
+        System.out.println("");		
+		
+		return 0;
+	}
 }

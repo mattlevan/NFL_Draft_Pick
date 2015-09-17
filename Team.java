@@ -93,6 +93,11 @@ public class Team implements Comparable<Team> {
 
         return draftPick;
     }
+	
+	// Get a draft pick
+	public Player getDraftPick(int playerIndex) {
+		return draftPicks.get(playerIndex);
+	}
 
     // Override compareTo method for proper implementation of Comparable
     public int compareTo(Team otherTeam) {
