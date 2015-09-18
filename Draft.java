@@ -55,8 +55,8 @@ public class Draft {
         // Populate ArrayList players and give each Player a random round #
         rankPlayers();
 		
-		// Run the draft
-		draftPick();
+        // Run the draft
+        draftPick();
     }
 	
     // Generates a random number between 1 and upperLimit
